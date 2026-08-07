@@ -3,14 +3,24 @@ import {Pool} from "pg";
 const app: Application = express();
 const port = 8000;
 
+
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
 
 
 const pool = new Pool({
-    
-})
+    connectionString : "postgresql://neondb_owner:npg_DRA8GXkaKL2o@ep-mute-violet-ay5ldhrm-pooler.c-5.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require";
+});
+
+const initDb = async () => {
+    try{
+        await pool.query()
+    } catch (error) {
+        console.error(error); 
+    }
+
+};
 
 app.get('/', (req: Request, res: Response) => {
     //   res.send('Hello World!');
